@@ -1,14 +1,27 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import dotenv from 'dotenv';
+import cors from 'cors';
+
+dotenv.config();
 
 const app = express();
+
+// Add middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3001',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
+app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.BACKEND_URL,
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001',
     methods: ["GET", "POST"],
+    credentials: true
   },
 });
 

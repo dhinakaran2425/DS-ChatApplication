@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
 import io from "socket.io-client";
-const BACKEND_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+const BACKEND_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL || 'http://localhost:3000';
 const socketContext = createContext();
 
 // it is a hook.
