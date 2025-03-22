@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.flex-1::-webkit-scrollbar {
+    display: none;
+}
+
+/* For Firefox */
+.flex-1 {
+    scrollbar-width: none;
+}
