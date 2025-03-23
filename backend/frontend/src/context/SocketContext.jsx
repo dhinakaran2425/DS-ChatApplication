@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
 import io from "socket.io-client";
-const BACKEND_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL || 'http://localhost:3000';
 const socketContext = createContext();
 
 // it is a hook.
@@ -16,12 +15,10 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io(BACKEND_URL, {
+      const socket = io("http://localhost:3000", {
         query: {
           userId: authUser.user._id,
         },
-        withCredentials: true,
-        transports: ["websocket", "polling"]
       });
       setSocket(socket);
       socket.on("getOnlineUsers", (users) => {

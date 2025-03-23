@@ -6,8 +6,8 @@ import cookieParser from "cookie-parser";
 
 import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
-import { app, io, server } from "./SocketIO/server.js";
-
+import { app, server } from "./SocketIO/server.js";
+import path from "path"
 dotenv.config();
 
 // middleware
@@ -29,20 +29,19 @@ try {
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
 
-// Handle server startup with port retry logic
-const startServer = async () => {
-  try {
-    server.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  } catch (error) {
-    if (error.code === 'EADDRINUSE') {
-      console.log(`Port ${PORT} is busy, trying ${PORT + 1}`);
-      server.listen(PORT + 1);
-    } else {
-      console.error('Server error:', error);
-    }
-  }
-};
+//deployment
+if(process.env.NODE_ENV === "production") {
+  const dirPath = path.resolve();
+  
+  // Serve static files
+  app.use(express.static(path.join(dirPath, "frontend", "dist")));
+  
+  // Handle all other routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(dirPath, "frontend", "dist", "index.html"));
+  });
+}
 
-startServer();
+server.listen(PORT, () => {
+  console.log(`Server is Running on port ${PORT}`);
+});
