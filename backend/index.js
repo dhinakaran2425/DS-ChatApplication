@@ -37,8 +37,6 @@ if(process.env.NODE_ENV === "production"){
   res. sendFile(path. resolve(dirPath, "./frontend/dist","index.html")) ;
   })
 }
-    I
-
 server.listen(PORT, () => {
   console.log(`Server is Running on port ${PORT}`);
 });
