@@ -30,17 +30,14 @@ app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
 
 //deployment
-if(process.env.NODE_ENV === "production") {
-  const dirPath = path.resolve();
-  
-  // Serve static files
-  app.use(express.static(path.join(dirPath, "frontend", "dist")));
-  
-  // Handle all other routes
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(dirPath, "frontend", "dist", "index.html"));
-  });
+if(process.env.NODE_ENV === "production"){
+  const dirPath = path. resolve () ;
+  app. use(express.static("./frontend/dist"));
+  app.get("*", (req, res) =>{
+  res. sendFile(path. resolve(dirPath, "./frontend/dist","index.html")) ;
+  })
 }
+    I
 
 server.listen(PORT, () => {
   console.log(`Server is Running on port ${PORT}`);
