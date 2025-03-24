@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "build":"npm install && npm install --legacy-peer-deps --prefix frontend && npm run build --prefix frontend"
+   "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "build":"node index.js"
   },
   "author": "Dhinakaran",
   "license": "ISC",

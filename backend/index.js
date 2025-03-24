@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import userRoute from "./routes/user.route.js";
 import messageRoute from "./routes/message.route.js";
 import { app, server } from "./SocketIO/server.js";
-import path from "path"
+
 dotenv.config();
 
 // middleware
@@ -28,19 +28,6 @@ try {
 //routes
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
-
-//deployment
-if(process.env.NODE_ENV === "production") {
-  const dirPath = path.resolve();
-  
-  // Serve static files
-  app.use(express.static(path.join(dirPath, "frontend", "dist")));
-  
-  // Handle all other routes
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(dirPath, "frontend", "dist", "index.html"));
-  });
-}
 
 server.listen(PORT, () => {
   console.log(`Server is Running on port ${PORT}`);
