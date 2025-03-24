@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3001,
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: "https://ds-chatapplication.onrender.com/",
         changeOrigin: true,
       },
     },
