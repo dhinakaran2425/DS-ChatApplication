@@ -17,7 +17,7 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (auth?.user) {
       // Update socket connection configuration
-      const newSocket = io("http://localhost:3000", {
+      const newSocket = io("https://ds-chatapplication-1.onrender.com", {
         transports: ['polling', 'websocket'],
         secure: false,
         rejectUnauthorized: false,
